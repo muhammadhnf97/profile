@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import PerspectiveNav from "../components/PerspectiveNav.astro";
+import Engineering from "../components/Engineering.astro";
+import DigitalGrowth from "../components/DigitalGrowth.astro";
+import TechnicalGrowth from "../components/TechnicalGrowth.astro";
+import Experiments from "../components/Experiments.astro";
+import Experience from "../components/Experience.astro";
+import Skills from "../components/Skills.astro";
+import HowIThink from "../components/HowIThink.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { profile } from "../data/content";
+---
+
+<BaseLayout
+  title={`${profile.name} — ${profile.title}`}
+  description="Software, systems, digital products, and occasionally things that probably didn't need to be built."
+>
+  <Navbar />
+  <main>
+    <Hero />
+    <PerspectiveNav />
+    <div class="mx-auto max-w-7xl px-6">
+      <Engineering />
+      <DigitalGrowth />
+      <TechnicalGrowth />
+      <Experiments />
+      <Experience />
+      <Skills />
+      <HowIThink />
+      <About />
+      <Contact />
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

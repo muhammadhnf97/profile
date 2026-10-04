@@ -1,0 +1,21 @@
+---
+import { digitalGrowth } from "../data/content";
+import AreaBlock from "./AreaBlock.astro";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="digital-growth" class="py-20">
+  <SectionHeading path="digital-growth" title={digitalGrowth.title} />
+  <p class="max-w-2xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+    {digitalGrowth.description}
+  </p>
+
+  <div class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+    {digitalGrowth.areas.map((area) => <AreaBlock area={area} />)}
+  </div>
+
+  <p class="mt-10 font-mono text-sm text-zinc-500 dark:text-zinc-400">
+    <span class="text-indigo-600 dark:text-indigo-400">&gt;</span>
+    {digitalGrowth.positioning}
+  </p>
+</section>

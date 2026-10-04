@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  path: string;
+}
+
+const { title, path } = Astro.props;
+---
+
+<div class="mb-10 border-b border-zinc-200/70 pb-6 dark:border-zinc-800/70">
+  <p
+    class="font-mono text-xs tracking-widest text-indigo-600 dark:text-indigo-400"
+  >
+    ~/{path}
+  </p>
+  <h2 class="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+    {title}
+  </h2>
+</div>

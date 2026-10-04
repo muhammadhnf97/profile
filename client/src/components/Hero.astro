@@ -1,0 +1,106 @@
+---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { hero, perspectives, profile } from "../data/content";
+
+const photoSrc = existsSync(join(process.cwd(), "public", "me.jpg"))
+  ? "/me.jpg"
+  : null;
+const initials = profile.name
+  .split(/\s+/)
+  .map((w) => w[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
+---
+
+<section
+  id="top"
+  class="relative flex min-h-svh flex-col overflow-hidden"
+  aria-label="Introduction"
+>
+  <!-- giant name + photo -->
+  <div class="relative flex flex-1 items-center justify-center pt-16">
+    <p
+      aria-hidden="true"
+      class="animate-fade-in absolute select-none text-[22vw] font-black uppercase leading-none tracking-tighter text-zinc-100 dark:text-zinc-900"
+    >
+      {profile.name}
+    </p>
+    <h1 class="sr-only">{profile.name} — {profile.title}</h1>
+
+    <div class="animate-fade-up relative [animation-delay:200ms]">
+      {
+        photoSrc ? (
+          <img
+            src={photoSrc}
+            alt={`Portrait of ${profile.name}`}
+            class="h-64 w-52 rounded-2xl object-cover shadow-2xl ring-1 ring-zinc-900/10 sm:h-80 sm:w-64 dark:ring-white/10"
+          />
+        ) : (
+          <div
+            class="flex h-64 w-52 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-2xl ring-1 ring-zinc-900/10 sm:h-80 sm:w-64 dark:ring-white/10"
+            role="img"
+            aria-label={`Portrait of ${profile.name}`}
+          >
+            <span class="text-6xl font-black tracking-tight text-white/90">
+              {initials}
+            </span>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- headline + perspective buttons -->
+  <div class="flex flex-col items-center gap-5 px-6 pb-10 text-center">
+    <div>
+      <p class="text-2xl font-bold tracking-tight sm:text-3xl">
+        {hero.headline}
+      </p>
+      <p class="mt-2 max-w-md text-sm text-zinc-500 dark:text-zinc-400">
+        {hero.supporting}
+      </p>
+    </div>
+
+    <nav
+      class="flex flex-wrap items-baseline justify-center font-mono text-sm"
+      aria-label="Perspectives"
+    >
+      {
+        perspectives.map((p, i) => (
+          <>
+            {i > 0 && (
+              <span class="mx-3 text-zinc-300 dark:text-zinc-700">/</span>
+            )}
+            <a
+              href={`#${p.id}`}
+              class="text-zinc-500 underline-offset-4 transition-colors hover:text-indigo-600 hover:underline dark:text-zinc-400 dark:hover:text-indigo-400"
+            >
+              {p.label.toLowerCase()}
+            </a>
+          </>
+        ))
+      }
+    </nav>
+
+    <a
+      href="#engineering"
+      aria-label="Scroll to engineering section"
+      class="animate-bounce text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-5 w-5"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </a>
+  </div>
+</section>

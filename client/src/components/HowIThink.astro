@@ -1,0 +1,23 @@
+---
+import { principles } from "../data/content";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="how-i-think" class="py-20">
+  <SectionHeading path="how-i-think" title="How I think" />
+  <div class="grid gap-x-8 gap-y-8 sm:grid-cols-2">
+    {
+      principles.map((p, i) => (
+        <div>
+          <p class="font-mono text-sm text-indigo-600 dark:text-indigo-400">
+            {String(i + 1).padStart(2, "0")}.
+          </p>
+          <h3 class="mt-2 font-semibold">{p.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            {p.text}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</section>

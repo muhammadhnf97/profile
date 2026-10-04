@@ -1,0 +1,73 @@
+---
+import { experience } from "../data/content";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="experience" class="py-20">
+  <SectionHeading path="experience" title="Experience" />
+  <ul class="space-y-12">
+    {
+      experience.map((job) => (
+        <li class="relative border-l-2 border-zinc-200 pl-6 dark:border-zinc-800">
+          <div class="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-indigo-500" />
+
+          <div class="flex flex-wrap items-baseline gap-x-3">
+            <h3 class="text-lg font-semibold">{job.role}</h3>
+            {job.company && (
+              <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                {job.company}
+              </span>
+            )}
+            {job.period && (
+              <span class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+                {job.period}
+              </span>
+            )}
+          </div>
+
+          <div class="mt-4 grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
+            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+              // context
+            </p>
+            <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {job.context}
+            </p>
+          </div>
+
+          <div class="mt-4 grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
+            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+              // what i worked on
+            </p>
+            <p class="font-mono text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {job.workedOn.join(" · ")}
+            </p>
+          </div>
+
+          <div class="mt-4 grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
+            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+              // challenge
+            </p>
+            <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {job.challenge}
+            </p>
+          </div>
+
+          {job.result && (
+            <div class="mt-4 grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
+              <p class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+                // result
+              </p>
+              <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                {job.result}
+              </p>
+            </div>
+          )}
+
+          <p class="mt-5 font-mono text-xs text-zinc-400 dark:text-zinc-500">
+            {job.techAreas.join(" · ")}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

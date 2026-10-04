@@ -1,0 +1,11 @@
+---
+import { about } from "../data/content";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="about" class="py-20">
+  <SectionHeading path="about" title={about.title} />
+  <p class="max-w-2xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+    {about.text}
+  </p>
+</section>

@@ -1,0 +1,18 @@
+---
+import type { Area } from "../data/content";
+
+interface Props {
+  area: Area;
+}
+
+const { area } = Astro.props;
+---
+
+<div>
+  <h3 class="text-sm font-semibold">{area.title}</h3>
+  <p
+    class="mt-2 font-mono text-sm leading-relaxed text-zinc-500 dark:text-zinc-400"
+  >
+    {area.items.join(" · ")}
+  </p>
+</div>

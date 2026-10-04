@@ -1,0 +1,26 @@
+---
+import { engineering, projects } from "../data/content";
+import CaseCard from "./CaseCard.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const featured = projects.filter((p) => p.featured);
+const hasMore = projects.length > featured.length;
+---
+
+<section id="engineering" class="py-20">
+  <SectionHeading path="engineering" title={engineering.title} />
+  <p class="max-w-2xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+    {engineering.description}
+  </p>
+
+  <ul class="mt-10 divide-y divide-zinc-200/70 dark:divide-zinc-800/70">
+    {featured.map((p) => <CaseCard item={p} />)}
+  </ul>
+
+  <a
+    href="/projects"
+    class="mt-6 inline-block font-mono text-sm text-zinc-500 transition-colors hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400"
+  >
+    {hasMore ? `all ${projects.length} projects →` : "all projects →"}
+  </a>
+</section>

@@ -1,0 +1,94 @@
+---
+import type { CaseStudy } from "../data/content";
+
+interface Props {
+  item: CaseStudy;
+}
+
+const { item } = Astro.props;
+
+const allRows: [string, string | undefined][] = [
+  ["problem", item.problem],
+  ["what i built", item.built],
+  ["technical decisions", item.decisions],
+  ["challenges", item.challenges],
+  ["result", item.result],
+];
+const rows = allRows.filter(([, text]) => text);
+
+const summary = item.summary ?? item.built;
+---
+
+<li class="py-6 first:pt-0">
+  <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+    <h3 class="text-lg font-semibold">
+      {
+        item.link ? (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline-offset-4 hover:text-indigo-600 hover:underline dark:hover:text-indigo-400"
+          >
+            {item.title}
+          </a>
+        ) : (
+          item.title
+        )
+      }
+    </h3>
+    {
+      item.areas?.map((area) => (
+        <span class="rounded bg-indigo-500/10 px-1.5 py-0.5 font-mono text-xs text-indigo-600 dark:text-indigo-400">
+          {area}
+        </span>
+      ))
+    }
+    {
+      item.status && (
+        <span class="rounded bg-emerald-500/10 px-1.5 py-0.5 font-mono text-xs text-emerald-600 dark:text-emerald-400">
+          {item.status}
+        </span>
+      )
+    }
+  </div>
+
+  {
+    summary && (
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+        {summary}
+      </p>
+    )
+  }
+
+  {
+    rows.length > 0 && (
+      <details class="group mt-3">
+        <summary class="w-fit cursor-pointer font-mono text-xs text-zinc-400 transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 [&::-webkit-details-marker]:hidden">
+          <span class="group-open:hidden">+ story</span>
+          <span class="hidden group-open:inline">− story</span>
+        </summary>
+        <div class="mt-3 max-w-2xl border-l-2 border-zinc-200 pl-4 dark:border-zinc-800">
+          {rows.map(([label, text]) => (
+            <div class="mt-3 first:mt-0 grid gap-0.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+              <p class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+                // {label}
+              </p>
+              <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                {text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </details>
+    )
+  }
+
+  {
+    item.tech && item.tech.length > 0 && (
+      <p class="mt-3 font-mono text-xs text-zinc-400 dark:text-zinc-500">
+        {item.tech.join(" · ")}
+      </p>
+    )
+  }
+</li>

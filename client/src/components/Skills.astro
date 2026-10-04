@@ -1,0 +1,12 @@
+---
+import { skillGroups } from "../data/content";
+import AreaBlock from "./AreaBlock.astro";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="skills" class="py-20">
+  <SectionHeading path="skills" title="Skills" />
+  <div class="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+    {skillGroups.map((group) => <AreaBlock area={group} />)}
+  </div>
+</section>
